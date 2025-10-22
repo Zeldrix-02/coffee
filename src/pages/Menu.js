@@ -33,6 +33,16 @@ export default function Menu() {
     setFormData({ ...formData, [name]: name === 'quantity' ? parseInt(value) || 1 : value });
   };
 
+  const incrementQuantity = () => {
+    setFormData({ ...formData, quantity: formData.quantity + 1 });
+  };
+
+  const decrementQuantity = () => {
+    if (formData.quantity > 1) {
+      setFormData({ ...formData, quantity: formData.quantity - 1 });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const totalPrice = selectedItem.price * formData.quantity;
@@ -112,17 +122,33 @@ export default function Menu() {
               {/* Quantity */}
               <div className="mb-3 text-start">
                 <label className="form-label">Quantity</label>
-                <input
-                  type="number"
-                  name="quantity"
-                  className="form-control"
-                  min="1"
-                  value={formData.quantity}
-                  onChange={handleChange}
-                  onFocus={(e) => e.target.select()}
-                  onClick={(e) => e.target.select()}
-                  required
-                />
+                <div className="input-group">
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={decrementQuantity}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    name="quantity"
+                    className="form-control text-center"
+                    min="1"
+                    value={formData.quantity}
+                    onChange={handleChange}
+                    onFocus={(e) => e.target.select()}
+                    onClick={(e) => e.target.select()}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={incrementQuantity}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
 
               {/* Notes */}
