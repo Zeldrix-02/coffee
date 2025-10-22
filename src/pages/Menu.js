@@ -119,6 +119,8 @@ export default function Menu() {
                   min="1"
                   value={formData.quantity}
                   onChange={handleChange}
+                  onFocus={(e) => e.target.select()}
+                  onClick={(e) => e.target.select()}
                   required
                 />
               </div>
